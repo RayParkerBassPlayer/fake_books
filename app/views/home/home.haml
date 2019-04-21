@@ -6,14 +6,17 @@
     = text_field_tag(:search_string, @search_string)
     = submit_tag("Find")
 
-%div#results
-  %ul
-    - @tunes.each do |tune|
-      %li
-        %span.title= tune.title
-        %ul
-          - tune.locations.sort{|l, r| l.book.title <=> r.book.title}.each do |location|
-            %li
-              %span.location= "#{location.book.title} #{location.page}"
+- if @tunes.any?
+  %div#results
+    %ul
+      - @tunes.each do |tune|
+        %li
+          %span.title= tune.title
+          %ul
+            - tune.locations.sort{|l, r| l.book.title <=> r.book.title}.each do |location|
+              %li
+                %span.location= "#{location.book.title} #{location.page}"
+- if @message.present?
+  %div#message= @message
 
         

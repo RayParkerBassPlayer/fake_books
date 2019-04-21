@@ -53,3 +53,7 @@ h1{
 .location{
   color: red;
 }
+
+#message{
+  text-align: center;
+}
