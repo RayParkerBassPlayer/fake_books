@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   end
 
   def find
-    @search_string = params[:search_string]
+    @search_string = params[:search_string].try(:squish)
 
     if @search_string.present?
       @tunes = Tune.includes(:locations => :book).where("tunes.title like '%#{@search_string}%'")
@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     end
 
     if @tunes.empty? && @message.blank?
-      @message = "'#{@search_string}' turned up no results.'"
+      @message = "'#{@search_string}' turned up no results."
     end
 
     render :home
