@@ -66,7 +66,6 @@ describe Tune do
     it "must have both a page and a book" do
       tune = create(:tune)
 
-      # expect{tune.add_location!({:page => 30, :book => FFaker::Book.title})}.not_to raise_error(ArgumentError)
       expect{tune.add_location!({:page => nil, :book => FFaker::Book.title})}.to raise_error(ArgumentError)
       expect{tune.add_location!({:page => 30, :book => nil})}.to raise_error(ArgumentError)
     end
