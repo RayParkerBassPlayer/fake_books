@@ -1,16 +1,19 @@
-%h1 Fake Books
+%div#title
+  %h1 Fake Books
 
-%div
+%div#searchForm
   = form_tag(:find_tune) do
     = text_field_tag(:search_string, @search_string)
     = submit_tag("Find")
 
-%ul
-  - @tunes.each do |tune|
-    %li
-      = tune.title
-      %ul
-        - tune.locations.sort{|l, r| l.book.title <=> r.book.title}.each do |location|
-          %li= "#{location.book.title} #{location.page}"
+%div#results
+  %ul
+    - @tunes.each do |tune|
+      %li
+        %span.title= tune.title
+        %ul
+          - tune.locations.sort{|l, r| l.book.title <=> r.book.title}.each do |location|
+            %li
+              %span.location= "#{location.book.title} #{location.page}"
 
-      
+        
