@@ -10,7 +10,9 @@ class HomeController < ApplicationController
     @search_string = params[:search_string].try(:squish)
 
     if @search_string.present?
-      @tunes = Tune.includes(:locations => :book).where("tunes.title like '%#{@search_string}%'")
+      # Escape search to handle quotes and such using Arel.
+      tunes = Tune.arel_table
+      @tunes = Tune.includes(:locations => :book).where(tunes[:title].matches("%#{@search_string}%"))
     else
       @tunes = []
       @message = "Please key in a search."
