@@ -31,7 +31,9 @@ class HomeController < ApplicationController
   def log_query
     if request.method == "POST"
       begin
-        QueryLog.create!(:ip => request.ip, :query => params[:search_string])
+        if params[:search_string].present?
+          QueryLog.create!(:ip => request.ip, :query => params[:search_string])
+        end
       rescue => e
         Rails.logger.error "Unable to log query. #{request.ip}:'#{params[:search_string]}'"
         Rails.logger.error e.message
