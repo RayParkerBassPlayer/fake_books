@@ -5,7 +5,7 @@
 
     %div#searchForm
       = form_tag(:find_tune) do
-        = text_field_tag(:search_string, @search_string, :autofocus => true)
+        = text_field_tag(:search_string, @search_string, :autofocus => true, :placeholder => "Search for a Song Title")
         = submit_tag("Find")
 
     - if @tunes.any?
