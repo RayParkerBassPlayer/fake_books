@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_action :log_query, :only => :find
+  rescue_from Exception, :with => :handle_exception
 
   def home
     @tunes = []
@@ -37,5 +38,14 @@ class HomeController < ApplicationController
         Rails.logger e.backtrace
       end
     end
+  end
+
+  private
+
+  def handle_exception(exception)
+    @message = exception.message
+    @tunes = [] # Make sure that page doesn't blow up.
+
+    render :home
   end
 end
