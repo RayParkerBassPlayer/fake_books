@@ -1,22 +1,25 @@
-%div#title
-  %h1 Find in Fake Books
+%div#page-container
+  %div#content-wrap
+    %div#title
+      %h1 Find in Fake Books
 
-%div#searchForm
-  = form_tag(:find_tune) do
-    = text_field_tag(:search_string, @search_string, :autofocus => true)
-    = submit_tag("Find")
+    %div#searchForm
+      = form_tag(:find_tune) do
+        = text_field_tag(:search_string, @search_string, :autofocus => true)
+        = submit_tag("Find")
 
-- if @tunes.any?
-  %div#results
-    %ul
-      - @tunes.each do |tune|
-        %li
-          %span.title= tune.title
-          %ul
-            - tune.locations.sort{|l, r| l.book.title <=> r.book.title}.each do |location|
-              %li
-                %span.location= "#{location.book.title} #{location.page}"
-- if @message.present?
-  %div#message= @message
-
-        
+    - if @tunes.any?
+      %div#results
+        %ul
+          - @tunes.each do |tune|
+            %li
+              %span.title= tune.title
+              %ul
+                - tune.locations.sort{|l, r| l.book.title <=> r.book.title}.each do |location|
+                  %li
+                    %span.location= "#{location.book.title} #{location.page}"
+    - if @message.present?
+      %div#message= @message
+  %div#footer        
+    %hr
+    = link_to("Questions, submissions, feedback." ,"mailto:FindInFakeBooks@gmail.com")

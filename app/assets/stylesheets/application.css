@@ -15,8 +15,37 @@
  */
 
 
-body{
+html, body{
   font-family: courier;
+}
+
+#page-container {
+  position: relative;
+  min-height: 90vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+  text-align: center;
+}
+
+#footer hr{
+  border-style: solid;
+  border-color: black;
+  border-width: 1px 0 0 0;
+  width: 25%;
+}
+
+#footer a, a:hover, a:visited{
+  color: darkblue;
+  text-decoration: none;
 }
 
 #title{
