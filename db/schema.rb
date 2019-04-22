@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_21_071508) do
+ActiveRecord::Schema.define(version: 2019_04_22_021635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 2019_04_21_071508) do
     t.integer "book_id"
     t.string "page"
     t.index ["tune_id", "book_id"], name: "index_locations_on_tune_id_and_book_id"
+  end
+
+  create_table "query_logs", force: :cascade do |t|
+    t.string "ip"
+    t.string "query"
+    t.datetime "created_at", null: false
   end
 
   create_table "tunes", force: :cascade do |t|

@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :log_query, :only => :find
+
   def home
     @tunes = []
     @search_string = nil
@@ -19,5 +21,19 @@ class HomeController < ApplicationController
     end
 
     render :home
+  end
+
+  private
+
+  def log_query
+    if request.method == "POST"
+      begin
+        QueryLog.create!(:ip => request.ip, :query => params[:search_string])
+      rescue => e
+        Rails.logger.error "Unable to log query. #{request.ip}:'#{params[:search_string]}'"
+        Rails.logger.error e.message
+        Rails.logger e.backtrace
+      end
+    end
   end
 end
