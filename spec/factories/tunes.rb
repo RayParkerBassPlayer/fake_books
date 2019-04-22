@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory(:tune) do
-    title { FFaker::Music.song }
+    sequence(:title) {|n| "#{FFaker::Music.song} #{n}"}
 
     trait :with_location do |tune|
       after(:create) do |tune|
