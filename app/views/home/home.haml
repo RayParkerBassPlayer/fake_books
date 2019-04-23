@@ -18,6 +18,9 @@
                 - tune.locations.sort{|l, r| l.book.title <=> r.book.title}.each do |location|
                   %li
                     %span.location= "#{location.book.title} #{location.page}"
+                - tune.i_real_files.each do |i_real_file|
+                  %li
+                    %span.ireal= link_to("Import iReal", i_real_import_path(i_real_file.id), :target => "_blank")
     - if @message.present?
       %div#message= @message
 
