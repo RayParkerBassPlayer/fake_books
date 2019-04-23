@@ -2,6 +2,8 @@ class HomeController < ApplicationController
   before_action :log_query, :only => :find
   rescue_from Exception, :with => :handle_exception
 
+  layout false, :only => :i_real_import
+
   def home
     @tunes = []
     @search_string = nil
@@ -13,7 +15,7 @@ class HomeController < ApplicationController
     if @search_string.present?
       # Escape search to handle quotes and such using Arel.
       tunes = Tune.arel_table
-      @tunes = Tune.includes(:locations => :book).where(tunes[:title].matches("%#{@search_string}%"))
+      @tunes = Tune.includes(:i_real_files, :locations => :book).where(tunes[:title].matches("%#{@search_string}%"))
     else
       @tunes = []
       @message = "Please key in a search."
@@ -24,6 +26,20 @@ class HomeController < ApplicationController
     end
 
     render :home
+  end
+
+  def i_real_import
+    i_real_file = IRealFile.find(params[:id])
+    song_hash = i_real_file.song_hash
+    template = File.read(File.join(Rails.root, "lib/templates/ireal.html"))
+
+
+    @file = template.gsub("{{ENCODED_SONG}}", i_real_file.to_i_real_url_encoded)
+    @file = @file.gsub("{{SONG_TITLE}}", song_hash["title"])
+
+    if !song_hash["composer"].blank?
+      @file = @file.gsub("{{COMPOSER}}", " - #{song_hash["composer"]}")
+    end
   end
 
   private
@@ -42,7 +58,7 @@ class HomeController < ApplicationController
     end
   end
 
-  private
+
 
   def handle_exception(exception)
     @message = exception.message
