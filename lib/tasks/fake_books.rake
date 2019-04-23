@@ -17,7 +17,7 @@ namespace :fake_books do
 
   desc "Import JSONified plist of iReal tunes"
   task :import_ireal => :environment do
-    entries = JSON.parse(File.read(File.join(Rails.root, "materiel", "UserSongs.plist")))
+    entries = JSON.parse(File.read(File.join(Rails.root, "db/etc", "UserSongs.plist")))
 
     entries.each do |entry|
       begin
