@@ -14,4 +14,19 @@ namespace :fake_books do
       end
     end
   end
+
+  desc "Import JSONified plist of iReal tunes"
+  task :import_ireal => :environment do
+    entries = JSON.parse(File.read(File.join(Rails.root, "materiel", "UserSongs.plist")))
+
+    entries.each do |entry|
+      begin
+        IRealFile.create_from_json!(entry)
+        print "."
+      rescue => e
+        puts "Error adding tune '#{entry["title"]}': #{e}"
+        puts e.backtrace.join("\n")
+      end
+    end
+  end
 end

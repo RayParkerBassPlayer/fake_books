@@ -15,6 +15,7 @@ describe Tune do
       should_not belong_to(:book)
       should have_many(:locations)
       should have_many(:books).through(:locations)
+      should have_many(:i_real_files)
     end
   end
 
@@ -62,12 +63,16 @@ describe Tune do
     end
   end
 
-  describe "add locations" do
+  describe "adding locations" do
     it "must have both a page and a book" do
       tune = create(:tune)
 
       expect{tune.add_location!({:page => nil, :book => FFaker::Book.title})}.to raise_error(ArgumentError)
       expect{tune.add_location!({:page => 30, :book => nil})}.to raise_error(ArgumentError)
     end
+  end
+
+  describe "adding iRealFiles" do
+    
   end
 end

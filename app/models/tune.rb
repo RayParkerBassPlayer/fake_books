@@ -5,6 +5,7 @@ class Tune < ApplicationRecord
 
   has_many :locations
   has_many :books, :through => :locations
+  has_many :i_real_files
 
   def self.add_tune!(title:, page: nil, book: nil)
     valid_location?(page, book)
