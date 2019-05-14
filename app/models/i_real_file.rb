@@ -36,6 +36,5 @@ class IRealFile < ApplicationRecord
 
   def to_i_real_url_encoded
     encoded_tune = %Q[#{self.song_hash["title"]}=#{self.song_hash["composer"]}==#{self.song_hash["style"]}=#{self.song_hash["key_signature"]}==#{self.song_hash["chord_progression"]}]
-
   end
 end
