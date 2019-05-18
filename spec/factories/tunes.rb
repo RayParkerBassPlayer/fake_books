@@ -4,7 +4,7 @@ FactoryBot.define do
 
     trait :with_location do |tune|
       after(:create) do |tune|
-        tune.add_location((1..1000).sample, create(:book))
+        tune.add_location(:page => (1..1000).sample, :book => create(:book))
       end
     end
   end

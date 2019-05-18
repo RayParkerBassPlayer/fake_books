@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_161112) do
+ActiveRecord::Schema.define(version: 2019_05_18_162305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_161112) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.citext "title"
+    t.integer "offset", default: 0
     t.index ["title"], name: "index_books_on_title", unique: true
   end
 
@@ -36,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_161112) do
     t.datetime "updated_at", null: false
     t.integer "tune_id"
     t.integer "book_id"
-    t.string "page"
+    t.integer "page", default: 0
     t.index ["tune_id", "book_id"], name: "index_locations_on_tune_id_and_book_id"
   end
 

@@ -19,4 +19,24 @@ describe Location do
       should belong_to(:tune)
     end
   end
+
+  describe "page with offset" do
+    it "returns its page without offset" do
+      book = create(:book, :offset => 9)
+      tune = create(:tune)
+      location = create(:location, :tune => tune, :book => book, :page => 10)
+
+      expect(location.page).to eq 10
+    end
+
+    it "returns its page with offset" do
+      offset = 9
+      page = 10
+      book = create(:book, :offset => offset)
+      tune = create(:tune)
+      location = create(:location, :tune => tune, :book => book, :page => page)
+
+      expect(location.pdf_page).to eq ( page + offset)    
+    end
+  end
 end

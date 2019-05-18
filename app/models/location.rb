@@ -5,4 +5,8 @@ class Location < ApplicationRecord
 
   belongs_to(:book)
   belongs_to(:tune)
+
+  def pdf_page
+    page + book.offset
+  end
 end
