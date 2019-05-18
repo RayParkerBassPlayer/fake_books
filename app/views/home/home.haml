@@ -17,8 +17,8 @@
               %ul
                 - tune.locations.sort{|l, r| l.book.title <=> r.book.title}.each do |location|
                   %li
-                    -if location.pdf_page > 0
-                      %span.location= "#{location.book.title} #{location.page} (PDF Pg. #{location.pdf_page})"
+                    - if location.book.offset != 0
+                      %span.location= "#{location.book.title} pg. #{location.page} (pdf pg. #{location.pdf_page})"
                     - else
                       %span.location= "#{location.book.title} #{location.page}"
                 - tune.i_real_files.each do |i_real_file|
