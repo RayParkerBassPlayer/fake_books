@@ -15,9 +15,5 @@ describe IRealFile do
       should have_db_column(:tune_id)
       should have_db_column(:song_hash)
     end
-
-    it "validates format of json file" do
-
-    end
   end
 end
