@@ -27,7 +27,7 @@ end
 # Use the proper creds for this environment.
 db_config = Rails.configuration.database_configuration[Rails.env].symbolize_keys
 
-print_feedback("Bulk loading files into #{db_config[:database]} as #{db_config[:username]}:#{db_config[:password] || "nil"} (#{Rails.env} environment)", :banner_char => "#")
+print_feedback("Bulk loading files into #{db_config[:database]} as #{db_config[:username] || `whoami`.strip}:#{db_config[:password] || "nil"} (#{Rails.env} environment)", :banner_char => "#")
 
 # Load all of the SQL dump files in /db/seeds
 # Uses the database configuration for settings
