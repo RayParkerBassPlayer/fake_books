@@ -17,5 +17,5 @@ test:
 production:
   <<: *default
   database: fake_books_production
-  username: fake_books
-  password: <%= ENV['FAKE_BOOKS_DATABASE_PASSWORD'] %>
+  username: ubuntu
+  password: password
