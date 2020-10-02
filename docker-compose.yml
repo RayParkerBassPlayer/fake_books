@@ -17,7 +17,6 @@ services:
       - db-data:/usr/local/pgsql/data 
   app:
     build: .
-    restart: always
     depends_on: 
       - postgres
 
