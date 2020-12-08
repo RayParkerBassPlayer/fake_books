@@ -48,7 +48,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   config.before(:suite) do
-    DatabaseCleaner.clean!
+    DatabaseCleaner.clean
     load File.join(Rails.root, "spec/seeds.rb")
   end
 
